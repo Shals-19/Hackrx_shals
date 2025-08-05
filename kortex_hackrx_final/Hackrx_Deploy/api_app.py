@@ -42,6 +42,9 @@ app = FastAPI(title="HackRx Document Query-Retrieval System")
 # Global variables for lazy loading
 processor = None
 loading_in_progress = False
+# Initialize processor
+global processor
+processor = DynamicRAGProcessor()
 
 async def initialize_processor():
     
@@ -321,9 +324,7 @@ async def initialize_processor():
                     traceback.print_exc()
                     return {"answers": [f"An error occurred: {str(e)}"], "status": "error"}
         
-        # Initialize processor
-        global processor
-        processor = DynamicRAGProcessor()
+
         
     except Exception as e:
         print(f"Error initializing processor: {e}")
@@ -407,4 +408,5 @@ async def startup_event():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("api_app:app", host=HOST, port=PORT, reload=DEBUG)
+
 
