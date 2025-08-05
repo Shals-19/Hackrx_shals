@@ -44,9 +44,9 @@ processor = None
 loading_in_progress = False
 
 async def initialize_processor():
-    """Lazy load the processor and models in the background"""
-    global processor, loading_in_progress
     
+    global processor, loading_in_progress
+    """Lazy load the processor and models in the background"""
     if processor is not None or loading_in_progress:
         return
     
@@ -407,3 +407,4 @@ async def startup_event():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("api_app:app", host=HOST, port=PORT, reload=DEBUG)
+
